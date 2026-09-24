@@ -25,6 +25,20 @@
 
 > **HTML 열람 방법:** GitHub 파일 화면에서는 HTML이 웹페이지로 실행되지 않습니다. 저장소를 ZIP으로 내려받아 압축을 풀고 `outputs copy/report.html`을 브라우저에서 열면 됩니다. 차트 파일도 같은 폴더에 유지하세요. Plotly 차트는 인터넷 연결이 필요합니다. CSV.gz는 내려받아 압축을 해제한 뒤 확인할 수 있습니다.
 
+### HTML 리포트 미리보기
+
+아래는 [HTML 분석 리포트](outputs%20copy/report.html)의 주요 화면을 실제 브라우저에서 캡처한 이미지입니다. **2026-08-07에 생성된 저장 리포트** 기준이며, 이미지를 클릭하면 원본 크기로 확인할 수 있습니다.
+
+**데이터 요약 · 로딩 비교 · 모델 성능**
+
+[![HTML 리포트: 학습·테스트 데이터 규모, Pandas·Polars 로딩 비교, 베이스라인과 최종 모델 성능](docs/images/report-overview.png)](docs/images/report-overview.png)
+
+**변수 중요도 · 요금제별 오차 진단**
+
+[![HTML 리포트: 변수 중요도 Top 15와 요금제별 오차 비교](docs/images/report-diagnostics.png)](docs/images/report-diagnostics.png)
+
+전체 차트와 통계 결과는 [원본 HTML 리포트](outputs%20copy/report.html)를 내려받아 확인할 수 있습니다.
+
 ### 주요 차트 미리보기
 
 원본 데이터의 품질 점검부터 정제 데이터의 분포·관계까지 대표 차트 4개를 모았습니다. 이미지를 클릭하면 원본 크기로 볼 수 있습니다.
