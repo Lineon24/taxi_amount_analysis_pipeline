@@ -6,6 +6,54 @@
 
 > 분석 내용과 제출 성과는 「NYC Yellow Taxi 요금 예측 보고서 이준희.docx.pdf」를 기준으로 정리했습니다. 보고서의 실험 결과와 현재 저장소의 코드·저장 산출물이 다른 부분은 아래에 구분해 표시했습니다.
 
+## 산출물 바로 보기
+
+파이프라인을 다시 실행하지 않아도 아래 링크에서 **저장된 분석 결과와 모델 산출물**을 확인할 수 있습니다. 모든 링크는 저장소에 포함된 [`outputs copy/`](outputs%20copy/)의 기존 실행 결과를 가리킵니다.
+
+| 분류 | 산출물 | 확인할 내용 |
+|---|---|---|
+| 종합 리포트 | [HTML 분석 리포트](outputs%20copy/report.html) | 데이터 로딩·통계·시각화·모델 평가 종합 |
+| 모델 평가 | [성능 지표 JSON](outputs%20copy/metrics.json) | 베이스라인과 모델 성능, 학습·테스트 행 수, 피처·트리 수 |
+| 오차 진단 | [요금제별 오차 CSV](outputs%20copy/error_by_ratecode.csv) | 요금제별 예측 오차와 전체 오차 기여도 |
+| 모델 해석 | [변수 중요도 CSV](outputs%20copy/feature_importance.csv) | 변수별 gain, 중요도 비율, 피처 그룹 |
+| 통계 검정 | [통계 분석 결과](outputs%20copy/statistics.txt) | 요금제 비교 검정과 상관 분석 |
+| 로딩 비교 | [Pandas·Polars 비교 JSON](outputs%20copy/data_loading_comparison.json) | 데이터 로딩 시간과 결과 일치 여부 |
+| 예측 결과 | [테스트 예측값 CSV.gz](outputs%20copy/test_predictions.csv.gz) | 실제값과 예측값 비교용 압축 CSV |
+| 학습 모델 | [요금 예측 파이프라인 Joblib](outputs%20copy/fare_model_pipeline.joblib) | 피처 생성·인코딩·XGBoost를 결합한 저장 모델 |
+
+**저장 실행 요약 · 2026-08-07 생성:** MAE **$2.6730** · RMSE **$5.0046** · R² **0.9055** · ±$5 이내 **85.94%**. 아래 본문의 제출 보고서 성능과는 별도 실행 결과입니다.
+
+> **HTML 열람 방법:** GitHub 파일 화면에서는 HTML이 웹페이지로 실행되지 않습니다. 저장소를 ZIP으로 내려받아 압축을 풀고 `outputs copy/report.html`을 브라우저에서 열면 됩니다. 차트 파일도 같은 폴더에 유지하세요. Plotly 차트는 인터넷 연결이 필요합니다. CSV.gz는 내려받아 압축을 해제한 뒤 확인할 수 있습니다.
+
+### 주요 차트 미리보기
+
+원본 데이터의 품질 점검부터 정제 데이터의 분포·관계까지 대표 차트 4개를 모았습니다. 이미지를 클릭하면 원본 크기로 볼 수 있습니다.
+
+| 원본 데이터 · 컬럼별 결측치 비율 | 정제 데이터 · 팁 제외 요금 분포 |
+|:---:|:---:|
+| [![원본 데이터 컬럼별 결측치 비율](outputs%20copy/visualization_raw_cell_4.png)](outputs%20copy/visualization_raw_cell_4.png) | [![정제 데이터의 팁 제외 요금 분포](outputs%20copy/visualization_processed_cell_5.png)](outputs%20copy/visualization_processed_cell_5.png) |
+| 결측치 처리 대상 컬럼 확인 | 예측 대상의 분포와 긴 오른쪽 꼬리 확인 |
+
+| 정제 데이터 · 요금제별 요금 분포 | 정제 데이터 · 수치형 변수 상관계수 |
+|:---:|:---:|
+| [![요금제별 팁 제외 요금 분포](outputs%20copy/visualization_processed_cell_7.png)](outputs%20copy/visualization_processed_cell_7.png) | [![거리·승객 수·요금제·요금 간 상관계수](outputs%20copy/visualization_processed_cell_11.png)](outputs%20copy/visualization_processed_cell_11.png) |
+| 요금제에 따른 요금 수준과 산포 비교 | 거리와 요금 등 변수 사이의 관계 확인 |
+
+<details>
+<summary>추가 차트와 분석 노트북 펼치기</summary>
+
+| 구분 | 산출물 |
+|---|---|
+| 원본 데이터 | [이상치를 포함한 수치형 변수 분포](outputs%20copy/visualization_raw_cell_6.png) · [승객 수·요금제 빈도](outputs%20copy/visualization_raw_cell_10.png) |
+| 정제 데이터 | [업체별 평균 요금](outputs%20copy/visualization_processed_cell_9.png) · [승차건수 상위 10개 지역](outputs%20copy/visualization_processed_cell_17.png) · [승객 수별 요금 분포](outputs%20copy/visualization_processed_cell_19.png) |
+| 인터랙티브 HTML · 원본 | [운행 거리와 총요금](outputs%20copy/visualization_raw_plotly_1.html) |
+| 인터랙티브 HTML · 정제 | [요금제별 운행 거리와 요금](outputs%20copy/visualization_processed_plotly_1.html) · [시간대별 운행 건수](outputs%20copy/visualization_processed_plotly_2.html) |
+| 분석 노트북 | [원본 데이터 EDA](notebooks/visualization_raw.ipynb) · [정제 데이터 EDA](notebooks/visualization_processed.ipynb) |
+
+인터랙티브 HTML은 위 안내에 따라 내려받아 브라우저에서 열어 주세요.
+
+</details>
+
 ## 프로젝트 목적
 
 시간대, 이동 거리, 요금제, 승객 수, 승하차 지역을 활용해 요금을 예측하고 다음 활용 가능성을 검토합니다. 아래 항목은 보고서에서 제안한 활용 방향이며, 현재 구현 범위는 오프라인 분석·모델 학습·리포트 생성입니다.
@@ -215,7 +263,9 @@ python src/report.py
 
 리포트만 갱신하려면 `outputs/`에 필수 지표 파일인 `metrics.json`과 `data_loading_comparison.json`이 있는 상태에서 `python src/report.py`를 실행합니다. `outputs copy/`의 기존 결과는 자동으로 읽지 않습니다.
 
-## 주요 산출물
+## 실행 시 생성되는 산출물
+
+아래는 새로 실행했을 때 생성되는 경로입니다. 저장소에 포함된 기존 결과는 상단의 [산출물 바로 보기](#산출물-바로-보기)에서 확인하세요.
 
 | 경로·파일 | 설명 |
 |---|---|
